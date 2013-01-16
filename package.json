@@ -1,0 +1,25 @@
+{
+	"name": "node-identd",
+	"description": "An ident daemon in node with a MongoDB and JSON backend",
+	"version": "0.0.1",
+	"author": "IRCAnywhere <support@ircanywhere.com>",
+	"contributors": [
+		{
+			"name": "Ricki Hastings",
+			"email": "ricki@ircanywhere.com"
+		}
+	],
+	"scripts": {
+		"start": "./src/server.js"
+	},
+	"dependencies": {
+		"mongoose": "2.5.10",
+		"function-queue": "0.0.12"
+	},
+	"engines": {
+		"node": ">= 0.6.11"
+	},
+	"bundleDependencies": [
+		"mongoose"
+	]
+}
