@@ -3,15 +3,13 @@
 	"description": "An ident daemon in node with a MongoDB and JSON backend",
 	"version": "0.0.1",
 	"author": "IRCAnywhere <support@ircanywhere.com>",
+	"main": "./src/server.js",
 	"contributors": [
 		{
 			"name": "Ricki Hastings",
 			"email": "ricki@ircanywhere.com"
 		}
 	],
-	"scripts": {
-		"start": "./src/server.js"
-	},
 	"dependencies": {
 		"mongoose": "2.5.10",
 		"function-queue": "0.0.12"
