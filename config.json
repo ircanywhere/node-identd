@@ -1,0 +1,18 @@
+{
+	"server": {
+		"ip": "127.0.0.1",
+		"port": 10113
+	},
+	"database": {
+		"storage": "json",
+		"url": "mongodb://ircanywhere:fth387fhjw8@localhost/webclient",
+		"collection": "idents"
+	},
+	"records": [
+		{
+			"localPort": 60949,
+			"remotePort": 6667,
+			"user": "Ricki"
+		}
+	]
+}
