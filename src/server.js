@@ -103,7 +103,7 @@ Server.createIpem = function()
 		})
 		.on('remove ident', function(uid)
 		{
-			console.log('destroying:', localPort, remotePort, uid);
+			console.log('destroying:', uid);
 		})
 		.start();
 };
