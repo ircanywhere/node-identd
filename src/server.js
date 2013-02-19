@@ -36,6 +36,9 @@ Server.start = function()
 	_this.port = 10113;
 	// get our ip and port
 
+	_this.createIpem();
+	// create the inter process emitter
+
 	_this.server = net.createServer(function(socket)
 	{
 		socket.on('data', function(data)
@@ -49,8 +52,6 @@ Server.start = function()
 	{
 		util.log('Now listening on ' + _this.ip + ':' + _this.port);
 		// ready to go
-
-		_this.createIpem();
 	});
 	// tell the socket server to listen on our port and ip
 };
@@ -63,10 +64,17 @@ Server.start = function()
 Server.createIpem = function()
 {
 	var _this = this;
-	
+
 	/*
 	 * An inter process event emitter which handles the RPC functions
 	 * basically two functions
+	 *
+	 * In a normal case we'd connect straight to this, but in this case
+	 * we connect to one thats already registered, ie the one used between
+	 * irc-factory <-> irca-backend <-> node-identd
+	 *
+	 * ... this is changed by using the correct port, and setting onlyConnect
+	 * to false instead of true.
 	 *
 	 * register - local port, remote port, uid
 	 * remove	- uid
@@ -77,26 +85,23 @@ Server.createIpem = function()
 			delayRestart: 0,
 			useSocket: true,
 			socket: {
-				onlyConnect: false,
+				onlyConnect: true,
 				socketPath: null,
-				port: 7300,
+				port: 7200,
 				host: 'localhost',
 				reconnect: true,
 				delayReconnect: 1000
 			}
 		})
-		.on('register', function(localPort, remotePort, uid)
+		.on('registerIdent', function(localPort, remotePort, uid)
 		{
 			console.log('registering:', localPort, remotePort, uid);
 		})
-		.on('remove', function(uid)
+		.on('removeIdent', function(uid)
 		{
 			console.log('destroying:', localPort, remotePort, uid);
 		})
-		.on('error', function(error)
-		{
-			console.log(error);
-		});
+		.start();
 };
 
 Server.start();
