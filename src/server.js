@@ -50,7 +50,7 @@ Server.start = function()
 		util.log('Now listening on ' + _this.ip + ':' + _this.port);
 		// ready to go
 
-		
+		_this.createIpem();
 	});
 	// tell the socket server to listen on our port and ip
 };
@@ -62,6 +62,8 @@ Server.start = function()
  */
 Server.createIpem = function()
 {
+	var _this = this;
+	
 	/*
 	 * An inter process event emitter which handles the RPC functions
 	 * basically two functions
@@ -69,7 +71,6 @@ Server.createIpem = function()
 	 * register - local port, remote port, uid
 	 * remove	- uid
 	 */
-	ipem = null;
 	ipem
 		.options({
 			restart: true,
@@ -94,7 +95,7 @@ Server.createIpem = function()
 		})
 		.on('error', function(error)
 		{
-
+			console.log(error);
 		});
 };
 
