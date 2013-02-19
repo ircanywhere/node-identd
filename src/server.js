@@ -97,11 +97,11 @@ Server.createIpem = function()
 		{
 			ipem.broadcast('identd connected', this.to);
 		})
-		.on('registerIdent', function(localPort, remotePort, uid)
+		.on('register ident', function(localPort, remotePort, uid)
 		{
 			console.log('registering:', localPort, remotePort, uid);
 		})
-		.on('removeIdent', function(uid)
+		.on('remove ident', function(uid)
 		{
 			console.log('destroying:', localPort, remotePort, uid);
 		})
