@@ -11,7 +11,7 @@
 const util = require('util'),
 	  net = require('net'),
 	  ipem = require('ipevents'),
-	  respond = require('./respond');
+	  respond = require('./respond').respond;
 // include our modules
 
 /*
@@ -19,9 +19,7 @@ const util = require('util'),
  *
  * A server object containing everything
  */
-var Server = {
-	records: []
-};
+var Server = {};
 
 /*
  * Server::start
@@ -43,8 +41,14 @@ Server.start = function()
 	{
 		socket.on('data', function(data)
 		{
-			console.log(data.toString());
-			//socket.end("23, 23 : USERID : LINUX : FakeUser");
+			var split = data.toString().split(','),
+				local = split[0].trim(),
+				remote = split[1].trim(),
+				record = respond.get(local, remote);
+			// set some variables
+
+			socket.end(respond.respond(local, remote, record));
+			// return some
 		});
 	});
 
@@ -99,11 +103,11 @@ Server.createIpem = function()
 		})
 		.on('register ident', function(localPort, remotePort, uid)
 		{
-			console.log('registering:', localPort, remotePort, uid);
+			respond.register(localPort, remotePort, uid)
 		})
 		.on('remove ident', function(uid)
 		{
-			console.log('destroying:', uid);
+			respond.remove(uid);
 		})
 		.start();
 };
