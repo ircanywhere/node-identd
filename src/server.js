@@ -93,6 +93,10 @@ Server.createIpem = function()
 				delayReconnect: 1000
 			}
 		})
+		.on('connected', function()
+		{
+			ipem.broadcast('identd connected', this.to);
+		})
 		.on('registerIdent', function(localPort, remotePort, uid)
 		{
 			console.log('registering:', localPort, remotePort, uid);
