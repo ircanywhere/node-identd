@@ -16,8 +16,5 @@
 	},
 	"engines": {
 		"node": ">= 0.6.11"
-	},
-	"bundleDependencies": [
-		"mongoose"
-	]
+	}
 }
